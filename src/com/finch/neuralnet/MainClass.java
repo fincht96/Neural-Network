@@ -1,12 +1,16 @@
 package com.finch.neuralnet;
 
+import java.util.ArrayList;
+
 public class MainClass {
 
 	public static void main(String[] args) {
 		
-		int inputNodes = 3;
-		int hiddenNodes = 3;
-		int outputNodes = 3;
+		
+		/* defines {2,3,1} neural net with learning rate of 0.3 */
+		int inputNodes = 2;
+		int hiddenNodes = 12;
+		int outputNodes = 1;
 		
 		double learningRate = 0.3;
 		
@@ -16,40 +20,82 @@ public class MainClass {
 		nn.init(inputNodes, hiddenNodes, outputNodes, learningRate);
 
 		
-		Matrix m1 = new Matrix(2,2);
-		Matrix m2 =	new Matrix(2,1);
+		ArrayList<Double> inputs = new ArrayList<Double>();
+		inputs.add(0.0);
+		inputs.add(0.0);
+	
 		
-		for(int row = 0; row < 2; ++row)
+		ArrayList<Double> targets = new ArrayList<Double>();
+		targets.add(0.0);
+		
+		
+		
+		
+		/* passes input data to matrix and gets result */
+		Matrix.print(nn.query(inputs));
+		
+		
+		System.out.println("\n\n");
+		
+		
+		for(int i = 0; i < 100000; i++)
 		{
-			for(int column = 0; column < 2; ++column)
-			{
-				m1.setElement(row,column, 1.0);
-			}
+			inputs.set(0, 0.0);
+			inputs.set(1, 0.0);
+			targets.set(0, 0.0);
+			
+			nn.train(inputs, targets);
+				
+			inputs.set(0, 0.0);
+			inputs.set(1, 1.0);
+			targets.set(0, 1.0);
+			
+			nn.train(inputs, targets);
+			
+			inputs.set(0, 1.0);
+			inputs.set(1, 0.0);
+			targets.set(0, 1.0);
+			
+			nn.train(inputs, targets);
+
+			inputs.set(0, 1.0);
+			inputs.set(1, 1.0);
+			targets.set(0, 0.0);
+			
+			nn.train(inputs, targets);
+			
+			
 		}
 		
 		
-		for(int row = 0; row < 2; ++row)
-		{
-			for(int column = 0; column < 1; ++column)
-			{
-				m2.setElement(row,column, 0.4);
-			}
-		}
-		
-		Matrix result = Matrix.multiply(m1, m2);
+	
 		
 		
 		
-		//Matrix.print(result);
+		inputs.set(0, 0.0);
+		inputs.set(1, 0.0);
+		System.out.println("i1: " + 0 + "\ti2:"  + 0);
+		Matrix.print(nn.query(inputs));
+		System.out.println("\n");
 		
 		
-		//mResult = Matrix.multiply(m1,m2);
+		inputs.set(0, 1.0);
+		inputs.set(1, 0.0);
+		System.out.println("i1: " + 1 + "\ti2:"  + 0);
+		Matrix.print(nn.query(inputs));
+		System.out.println("\n");
 		
-
-
+		inputs.set(0, 0.0);
+		inputs.set(1, 1.0);
+		System.out.println("i1: " + 0 + "\ti2:"  + 1);
+		Matrix.print(nn.query(inputs));
+		System.out.println("\n");
 		
-
-		
+		inputs.set(0, 1.0);
+		inputs.set(1, 1.0);
+		System.out.println("i1: " + 1 + "\ti2:"  + 1);
+		Matrix.print(nn.query(inputs));
+		System.out.println("\n");
 	}
 
 }

@@ -8,8 +8,28 @@ public class Matrix {
 	private int mNumColumns;
 	
 	
+	
+	
+	public ColumnVector toColumnVector()
+	{
+		assert (this.mNumColumns == 1) : "Matrix has > 1 column";
+		
+		ColumnVector cv = new ColumnVector(this.mNumRows);
+		
+		for(int r = 0; r < this.getNumRows(); r++)
+		{
+			cv.setElement(r, this.getElement(r, 0));
+		}
+	
+		return cv;
+	}
+	
+	
+	
+	
+	
 	/**
-	 * prints out Matrix object
+	 * Prints out Matrix object
 	 * @param m
 	 */
 	public static void print(Matrix m)
@@ -26,13 +46,44 @@ public class Matrix {
 	}
 	
 	
+	
+
+	
+	
+	
 	/**
-	 * Multiplies Matrix m1 by Matrix m2 and returns the result
+	 * Multiplies Matrix m by some double value and returns the result
+	 * @param val
+	 * @param m
+	 * @return
+	 */
+	public static Matrix multiply(double val, Matrix m)
+	{
+		Matrix resultMatrix = new Matrix(m.getNumRows(), m.getNumColumns());
+		
+		
+		for(int r = 0; r < m.getNumRows(); r++)
+		{
+			for(int c = 0; c < m.getNumColumns(); c++)
+			{
+				double newElementValue = val * m.getElement(r, c);
+				resultMatrix.setElement(r, c, newElementValue);
+			}
+		}
+		
+		
+		return resultMatrix;
+	}
+	
+	
+	
+	/**
+	 * Performs dot product between Matrix m1 by Matrix m2 and returns the result
 	 * @param m1
 	 * @param m2
 	 * @return 
 	 */
-	public static Matrix multiply(Matrix m1, Matrix m2)
+	public static Matrix dotProduct(Matrix m1, Matrix m2)
 	{
 
 		int numRowsM1 = m1.getNumRows();
@@ -70,8 +121,85 @@ public class Matrix {
 	}
 	
 	
+	/**
+	 * Adds Matrix m1 and Matrix m2 and returns a result matrix
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
+	public static Matrix addMatrix(Matrix m1, Matrix m2)
+	{
+		assert (m1.getNumRows() == m2.getNumRows()) 
+		&& (m1.getNumColumns() == m2.getNumColumns()) : "Matrices not equal sizes";
+		
+		Matrix resultMatrix = new Matrix(m1.getNumRows(), m1.getNumColumns());
+		
+		for(int r = 0; r < resultMatrix.getNumRows(); r++)
+		{
+			for(int c = 0; c < resultMatrix.getNumColumns(); c++)
+			{
+				double m1Element = m1.getElement(r, c);
+				double m2Element = m2.getElement(r, c);
+				
+				resultMatrix.setElement(r, c, m1Element + m2Element);
+			}
+		}
+		
+		
+		return resultMatrix;
+	}
 	
 	
+	/**
+	 * Subtracts Matrix m1 from Matrix m2, returns a result Matrix
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
+	public static Matrix subtractMatrix(Matrix m1, Matrix m2)
+	{
+		assert (m1.getNumRows() == m2.getNumRows()) 
+				&& (m1.getNumColumns() == m2.getNumColumns()) : "Matrices not equal sizes";
+		
+		
+		Matrix resultMatrix = new Matrix(m1.getNumRows(), m1.getNumColumns());
+		
+				
+		for(int r = 0; r < resultMatrix.getNumRows(); r++)
+		{
+			for(int c = 0; c < resultMatrix.getNumColumns(); c++)
+			{
+				double m1Element = m1.getElement(r, c);
+				double m2Element = m2.getElement(r, c);
+				
+				resultMatrix.setElement(r, c, m1Element - m2Element);
+			}
+		}
+		
+		
+		return resultMatrix;
+	}
+	
+	
+	/**
+	 * Transposes the matrix m
+	 * @param m
+	 * @return
+	 */
+	public static Matrix transpose(Matrix m)
+	{
+		Matrix transposeMatrix = new Matrix(m.getNumColumns(), m.getNumRows());
+		
+		for(int r = 0; r < transposeMatrix.getNumRows(); r++)
+		{
+			for(int c = 0; c < transposeMatrix.getNumColumns(); c++)
+			{
+				double originalElement = m.getElement(c, r);
+				transposeMatrix.setElement(r, c, originalElement);
+			}
+		}
+		return transposeMatrix;
+	}
 	
 	
 	
@@ -91,7 +219,7 @@ public class Matrix {
 		mM = new Double[numRows][numColumns];
 		
 		
-		/* Iterates through each element setting to 0.0 */
+		/* iterates through each element setting to 0.0 */
 		for(int r = 0; r < numRows; r++)
 		{
 			for(int c = 0; c < numColumns; c++)
@@ -107,7 +235,7 @@ public class Matrix {
 	
 	
 	/**
-	 * gets number of columns in matrix
+	 * Returns number of columns in matrix
 	 * @return
 	 */
 	int getNumColumns()
@@ -116,7 +244,7 @@ public class Matrix {
 	}
 	
 	/**
-	 * gets number of rows in matrix
+	 * Returns number of rows in matrix
 	 * @return
 	 */
 	int getNumRows()
