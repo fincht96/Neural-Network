@@ -210,7 +210,7 @@ public class Matrix {
 	 * @param numRows
 	 * @param numColumns
 	 */
-	Matrix(int numRows, int numColumns)
+	public Matrix(int numRows, int numColumns)
 	{
 		assert (numRows > 0) || (numColumns > 0) : "# Rows and Columns must be > 0"; 
 		
@@ -238,7 +238,7 @@ public class Matrix {
 	 * Returns number of columns in matrix
 	 * @return
 	 */
-	int getNumColumns()
+	public int getNumColumns()
 	{
 		return mNumColumns;
 	}
@@ -247,7 +247,7 @@ public class Matrix {
 	 * Returns number of rows in matrix
 	 * @return
 	 */
-	int getNumRows()
+	public int getNumRows()
 	{
 		return mNumRows;
 	}
@@ -260,7 +260,7 @@ public class Matrix {
 	 * @param colPos
 	 * @return
 	 */
-	Double getElement(int rowPos, int colPos)
+	public Double getElement(int rowPos, int colPos)
 	{
 		return mM[rowPos][colPos];
 	}
@@ -272,7 +272,7 @@ public class Matrix {
 	 * @param colPos
 	 * @param val
 	 */
-	void setElement(int rowPos, int colPos, Double val)
+	public void setElement(int rowPos, int colPos, Double val)
 	{
 		mM[rowPos][colPos] = val;
 	}

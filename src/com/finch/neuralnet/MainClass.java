@@ -9,7 +9,7 @@ public class MainClass {
 		
 		/* defines {2,3,1} neural net with learning rate of 0.3 */
 		int inputNodes = 2;
-		int hiddenNodes = 12;
+		int hiddenNodes = 5;
 		int outputNodes = 1;
 		
 		double learningRate = 0.3;
