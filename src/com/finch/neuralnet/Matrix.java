@@ -232,6 +232,29 @@ public class Matrix {
 		
 	}
 	
+	/**
+	 * Matrix copy constructor
+	 * @param m
+	 */
+	public Matrix(Matrix m)
+	{
+		this.mM = new Double[m.getNumRows()][m.getNumColumns()];
+		
+		// copies each element of matrix array
+		for(int r=0; r < m.getNumRows(); r++)
+		{
+			  for(int c=0; c < m.getNumColumns(); c++)
+			  {
+				  this.mM[r][c]=m.mM[r][c];
+			  }
+		}
+
+		
+		
+		
+		this.mNumColumns = m.mNumColumns;
+		this.mNumRows = m.mNumRows;
+	}
 	
 	
 	/**

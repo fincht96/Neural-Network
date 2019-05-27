@@ -27,6 +27,11 @@ public class ColumnVector {
 		list = new Double[size];
 	}
 	
+	public ColumnVector(ColumnVector cv)
+	{
+		this.list = cv.list;
+	}
+	
 	
 
 	public Matrix toMatrix()

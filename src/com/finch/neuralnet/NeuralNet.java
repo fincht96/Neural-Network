@@ -57,6 +57,68 @@ public class NeuralNet {
 	}
 	
 	
+	/**
+	 * Returns input to hidden layer weight matrix
+	 * @return
+	 */
+	public Matrix getInputHiddenWeights()
+	{
+		return new Matrix(mWIH);
+	}
+	
+	
+	/**
+	 * Sets the input to hidden layer weight matrix
+	 * @param weights
+	 */
+	public void setInputHiddenWeights(Matrix weights)
+	{
+		this.mWIH = weights; 
+	}
+	
+	/**
+	 * Sets the hidden to output layer weight matrix
+	 * @param weights
+	 */
+	public void setHiddenOutputWeights(Matrix weights)
+	{
+		this.mWHO = weights; 
+	}
+	
+	
+	
+	/**
+	 * Returns hidden to output layer weight matrix
+	 * @return
+	 */
+	public Matrix getHiddenOutputWeights()
+	{
+		return new Matrix(mWHO);
+	}
+	
+	
+	/**
+	 * Default constructor
+	 */
+	public NeuralNet()
+	{
+		
+	}
+	
+	/**
+	 * Copy constructor
+	 * @param nn
+	 */
+	public NeuralNet(NeuralNet nn)
+	{
+		mWIH = new Matrix(nn.mWIH);
+		mWHO = new Matrix(nn.mWHO);
+		numInputNodes = nn.numInputNodes;
+		numHiddenNodes = nn.numHiddenNodes;
+		numOutputNodes = nn.numOutputNodes;
+		learningRate = nn.learningRate;
+	}
+	
 	
 	
 	/**

@@ -38,7 +38,7 @@ public class MainClass {
 		System.out.println("\n\n");
 		
 		
-		for(int i = 0; i < 100000; i++)
+		for(int i = 0; i < 100; i++)
 		{
 			inputs.set(0, 0.0);
 			inputs.set(1, 0.0);
@@ -96,6 +96,30 @@ public class MainClass {
 		System.out.println("i1: " + 1 + "\ti2:"  + 1);
 		Matrix.print(nn.query(inputs));
 		System.out.println("\n");
+		
+		
+		NeuralNet clone = new NeuralNet(nn);
+		
+		
+		
+		System.out.println("Clone (unmodified): ");
+		Matrix.print(clone.query(inputs));
+		
+		
+		Matrix weights = clone.getInputHiddenWeights();
+		weights.setElement(0, 0, 1.0);
+		
+		clone.setInputHiddenWeights(weights);
+		
+		
+		
+		System.out.println("Clone (modified): ");
+		Matrix.print(clone.query(inputs));
+		
+		
+		Matrix.print(nn.query(inputs));
+		
+		
 	}
 
 }
